@@ -34,31 +34,31 @@
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO sys_log(
-			id, 
-			type, 
-			title,
-			create_by, 
-			create_date, 
-			remote_addr, 
-			user_agent, 
-			request_uri, 
-			method, 
-			params, 
-			exception
-		) VALUES (
-			#{id}, 
-			#{type}, 
-			#{title}, 
-			#{createBy.id}, 
-			#{createDate}, 
-			#{remoteAddr}, 
-			#{userAgent}, 
-			#{requestUri}, 
-			#{method}, 
-			#{params}, 
-			#{exception}
-		)
+			INSERT INTO sys_log(
+				id, 
+				type, 
+				title,
+				create_by, 
+				create_date, 
+				remote_addr, 
+				user_agent, 
+				request_uri, 
+				method, 
+				params, 
+				exception
+			) VALUES (
+				#{id}, 
+				#{type}, 
+				#{title}, 
+				#{createBy.id}, 
+				#{createDate}, 
+				#{remoteAddr}, 
+				#{userAgent}, 
+				#{requestUri}, 
+				#{method}, 
+				#{params}, 
+				#{exception}
+			)
 	</insert>
 	
 </mapper>

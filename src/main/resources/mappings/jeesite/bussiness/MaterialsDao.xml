@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.bussiness.program.dao.MaterialsDao">
+    
+	<sql id="busMaterialsColumns">
+		a.cell_name cellName,
+		a.patient_sample patientSample,
+		a.biology_sample biologySample,
+		a.del_flag delFlag
+	</sql>
+    
+	<select id="get" resultType="Materials">
+		SELECT 
+			<include refid="busMaterialsColumns"/>
+		FROM bus_materials a
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Materials">
+		SELECT 
+			<include refid="busMaterialsColumns"/>
+		FROM bus_materials a
+		<where>
+			1=1
+		    <!-- a.del_flag = #{delFlag} -->
+			<if test="cellName != null and cellName != ''">
+				AND a.cell_name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{cellName}||'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{cellName}, '%')</if>
+			</if>
+			<if test="patientSample != null and patientSample != ''">
+				AND a.patient_sample LIKE 
+					<if test="dbName == 'oracle'">'%'||#{patientSample}||'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{patientSample}, '%')</if>
+			</if>
+			<if test="biologySample != null and biologySample != ''">
+				AND a.biology_sample LIKE 
+					<if test="dbName == 'oracle'">'%'||#{biologySample}||'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{biologySample}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Materials">
+		SELECT 
+			<include refid="busMaterialsColumns"/>
+		FROM bus_materials a
+		<where>
+			a.del_flag = 0
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+</mapper>

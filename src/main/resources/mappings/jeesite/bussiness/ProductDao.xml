@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.bussiness.program.dao.ProductDao">
+    
+	<sql id="busProductColumns">
+		a.pro_name proName,
+		a.pro_supplier proSupplier,
+		a.memo memo,
+		a.del_flag delFlag
+	</sql>
+    
+	<select id="get" resultType="Product">
+		SELECT 
+			<include refid="busProductColumns"/>
+		FROM bus_product a
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Product">
+		SELECT 
+			<include refid="busProductColumns"/>
+		FROM bus_product a
+		<where>
+			1=1
+		    <!-- a.del_flag = #{delFlag} -->
+			<if test="proName != null and proName != ''">
+				AND a.pro_name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{proName}||'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{proName}, '%')</if>
+			</if>
+			<if test="proSupplier != null and proSupplier != ''">
+				AND a.pro_supplier LIKE 
+					<if test="dbName == 'oracle'">'%'||#{proSupplier}||'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{proSupplier}, '%')</if>
+			</if>
+			<if test="memo != null and memo != ''">
+				AND a.memo LIKE 
+					<if test="dbName == 'oracle'">'%'||#{memo}||'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{memo}, '%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Product">
+		SELECT 
+			<include refid="busProductColumns"/>
+		FROM bus_product a
+		<where>
+			a.del_flag = 0
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO bus_product(
+			id,
+			pro_name,
+			pro_supplier,
+			memo,
+			del_flag
+		) VALUES (
+			#{id},
+			#{proName},
+			#{proSupplier},
+			#{memo},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE bus_product SET 	
+			pro_name = #{pro_name},
+			pro_supplier = #{proSupplier},
+			memo = #{memo},
+			del_flag = #{delFlag}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE bus_product SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

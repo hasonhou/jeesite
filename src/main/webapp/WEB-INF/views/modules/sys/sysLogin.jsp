@@ -45,6 +45,9 @@
 		<div id="messageBox" class="alert alert-error ${empty message ? 'hide' : ''}"><button data-dismiss="alert" class="close">×</button>
 			<label id="loginError" class="error">${message}</label>
 		</div>
+		<div id="messageBox2" class="alert alert-success ${empty messageSuccess ? 'hide' : ''}"><button data-dismiss="alert" class="close">×</button>
+			<label id="loginInfo" class="success">${messageSuccess}</label>
+		</div>
 	</div>
 	<h1 class="form-signin-heading">${fns:getConfig('productName')}</h1>
 	<form id="loginForm" class="form-signin" action="${ctx}/login" method="post">
@@ -57,8 +60,10 @@
 			<sys:validateCode name="validateCode" inputCssStyle="margin-bottom:0;"/>
 		</div></c:if><%--
 		<label for="mobile" title="手机登录"><input type="checkbox" id="mobileLogin" name="mobileLogin" ${mobileLogin ? 'checked' : ''}/></label> --%>
-		<input class="btn btn-large btn-primary" type="submit" value="登 录"/>&nbsp;&nbsp;
-		<label for="rememberMe" title="下次不需要再登录"><input type="checkbox" id="rememberMe" name="rememberMe" ${rememberMe ? 'checked' : ''}/> 记住我（公共场所慎用）</label>
+		<input style="margin-top:-15px;" class="btn btn-large btn-primary" type="submit" value="登 录"/>&nbsp;&nbsp;
+		<label for="rememberMe" title="下次不需要再登录"><input type="checkbox" id="rememberMe" name="rememberMe" ${rememberMe ? 'checked' : ''}/> 记住我（公共场所慎用）
+			<br/>&nbsp;没有账号？<a href="${pageContext.request.contextPath}/register/toRegister">立即注册</a>
+		</label>
 		<div id="themeSwitch" class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#">${fns:getDictLabel(cookie.theme.value,'theme','默认主题')}<b class="caret"></b></a>
 			<ul class="dropdown-menu">
@@ -68,7 +73,7 @@
 		</div>
 	</form>
 	<div class="footer">
-		Copyright &copy; 2012-${fns:getConfig('copyrightYear')} <a href="${pageContext.request.contextPath}${fns:getFrontPath()}">${fns:getConfig('productName')}</a> - Powered By <a href="http://jeesite.com" target="_blank">JeeSite</a> ${fns:getConfig('version')} 
+		Copyright &copy; 2015-${fns:getConfig('copyrightYear')} <a href="${pageContext.request.contextPath}${fns:getFrontPath()}">${fns:getConfig('productName')}</a> - Powered By <a href="#" target="_blank">BIOX</a> ${fns:getConfig('version')} 
 	</div>
 	<script src="${ctxStatic}/flash/zoom.min.js" type="text/javascript"></script>
 </body>

@@ -137,7 +137,7 @@ public class UserUtils {
 	public static List<Role> getRoleList(){
 		@SuppressWarnings("unchecked")
 		List<Role> roleList = (List<Role>)getCache(CACHE_ROLE_LIST);
-		if (roleList == null){
+		if (roleList == null || roleList.isEmpty()){
 			User user = getUser();
 			if (user.isAdmin()){
 				roleList = roleDao.findAllList(new Role());

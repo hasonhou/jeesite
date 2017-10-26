@@ -130,7 +130,11 @@ public class SystemService extends BaseService implements InitializingBean {
 	public void saveUser(User user) {
 		if (StringUtils.isBlank(user.getId())){
 			user.preInsert();
-			userDao.insert(user);
+			if("用户自行注册".equals(user.getRemarks())){
+				userDao.registerUser(user);
+			}else{
+				userDao.insert(user);
+			}
 		}else{
 			// 清除原用户机构用户缓存
 			User oldUser = userDao.get(user.getId());

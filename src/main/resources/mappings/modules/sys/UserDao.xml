@@ -264,6 +264,41 @@
 		)
 	</insert>
 	
+	<!-- 用户注册 -->
+	<insert id="registerUser">
+		INSERT INTO sys_user(
+			id, 
+			company_id, 
+			office_id, 
+			login_name, 
+			password, 
+			no, 
+			name, 
+			email, 
+			phone, 
+			mobile, 
+			create_date, 
+			remarks, 
+			login_flag, 
+			del_flag
+		) VALUES (
+			#{id}, 
+			#{company.id}, 
+			#{office.id}, 
+			#{loginName}, 
+			#{password}, 
+			#{no}, 
+			#{name}, 
+			#{email}, 
+			#{phone}, 
+			#{mobile}, 
+			#{createDate}, 
+			#{remarks}, 
+			#{loginFlag}, 
+			0
+		)
+	</insert>
+	
 	<!-- 更新用户 -->
 	<update id="update">
 		UPDATE sys_user SET 

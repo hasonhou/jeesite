@@ -62,6 +62,9 @@
 			myEditor = CKEDITOR.instances.content;
 			myEditor.on("instanceReady",function(){
 				    contentWindow = $(".cke_wysiwyg_frame").get(0).contentWindow;
+				    $(".opLink",myEditor.document.$).each(function(i){
+						$(this).attr("onclick",$(this).attr("data-cke-pa-onclick")).css("cursor","pointer");
+					});
 					$("body",myEditor.document.$).on("keyup", function(e){
 						showOpt(this,e);
 					}); 
@@ -139,7 +142,6 @@
 			var range = contentWindow.getSelection().getRangeAt(0);
 			var offset = range.getBoundingClientRect();
 			var conOffset = $("#cke_content").offset();
-			console.log(offset.left+"===aaa==="+offset.top);
 			$(id).show().offset({
 				left: offset.left + conOffset.left +20,
 				top: offset.top+ conOffset.top +$("#cke_1_top").height() +  30

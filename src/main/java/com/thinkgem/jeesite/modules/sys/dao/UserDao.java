@@ -17,6 +17,8 @@ import com.thinkgem.jeesite.modules.sys.entity.User;
 @MyBatisDao
 public interface UserDao extends CrudDao<User> {
 	
+	public int registerUser(User user);
+	
 	/**
 	 * 根据登录名称查询用户
 	 * @param loginName

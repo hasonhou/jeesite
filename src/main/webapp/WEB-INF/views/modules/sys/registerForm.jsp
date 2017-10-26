@@ -19,6 +19,7 @@
 			min-width:600px;
 			border-radius:10px;
 			box-shadow:1px 1px 3px #B0B0B0;
+			background:#FFFFFF !important;
 		}
 		.control-label{
 			font-family: Helvetica,Georgia,Arial,sans-serif,宋体 !important;
@@ -68,7 +69,7 @@
         }
 	</script>
 </head>
-<body style="margin-top:80px;">
+<body style="margin-top:80px;background:#f5f5f5">
 	<form:form id="inputForm" modelAttribute="user" action="${pageContext.request.contextPath}/register/saveRegister" method="post" class="form-horizontal">
 		<div class="frTitle"><h1>用户注册</h1></div>
 		<sys:message content="${message}"/>
@@ -126,7 +127,7 @@
 		</div>
 		<input type="hidden" id="roleIdList" name="roleIdList" value="d0dc3546e723495db2fe9c57c237922f" />
 		<input type="hidden" id="remarks" name="remarks" value="用户自行注册" />
-		<div class="form-actions" style="text-align:center;padding:20px 0;]">
+		<div class="form-actions" style="text-align:center;padding:20px 0;background:#FFFFFF;border-radius:10px;border: 0;">
 			<input id="btnSubmit" class="btn btn-primary" type="submit" value="确 定"/>&nbsp;
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
